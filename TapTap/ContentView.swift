@@ -14,34 +14,33 @@ struct ContentView: View {
     @State var enlarge = false
 
     var body: some View {
-        VStack {
-            RealityView { content in
-                // Add the initial RealityKit content
-                if let scene = try? await Entity(named: "Scene", in: realityKitContentBundle) {
-                    content.add(scene)
-                }
-            } update: { content in
-                // Update the RealityKit content when SwiftUI state changes
-                if let scene = content.entities.first {
-                    let uniformScale: Float = enlarge ? 1.4 : 1.0
-                    scene.transform.scale = [uniformScale, uniformScale, uniformScale]
-                }
-            }
-            .gesture(TapGesture().targetedToAnyEntity().onEnded { _ in
-                enlarge.toggle()
-            })
+        RealityView { content in
+            let anchor = AnchorEntity(world: .zero)
+            content.add(anchor)
+            
+            Task {
+                do {
+                    let orbScene = try await Entity(named: "OrbScene", in: realityKitContentBundle)
+                    
+                    if let orb = orbScene.findEntity(named: "Sphere") {
+                        let orbClone = orb.clone(recursive: true)
+                        
+                        let x = Float.random(in: -0.5...0.5)
+                        let y = Float.random(in: -0.5...0.5)
+                        let z = Float.random(in: -0.5...0.5)
 
-            VStack {
-                Button {
-                    enlarge.toggle()
-                } label: {
-                    Text(enlarge ? "Reduce RealityView Content" : "Enlarge RealityView Content")
+                        
+                        orbClone.position = SIMD3(x, y, z)
+                        orbClone.scale = SIMD3(repeating: 0.2)
+                        
+                        anchor.addChild(orbClone)
+                    } else {
+                        print("Sphere entity not found inside OrbScene")
+                    }
+                } catch {
+                    print("Failed to load OrbScene: \(error)")
                 }
-                .animation(.none, value: 0)
-                .fontWeight(.semibold)
             }
-            .padding()
-            .glassBackgroundEffect()
         }
     }
 }
