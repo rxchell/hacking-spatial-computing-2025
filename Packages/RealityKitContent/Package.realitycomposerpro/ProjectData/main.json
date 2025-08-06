@@ -5,5 +5,9 @@
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/GridMaterial.usda" : "388995CA-80FC-432E-BA88-78270E4EFD9D",
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/OrbScene.usda" : "61EDCD05-32BC-45F9-B5FC-7399064D582E",
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/Scene.usda" : "90C576A0-F90A-43B8-9998-14918A66F863"
+  },
+  "projectID" : -6447836151338360344,
+  "uuidToIntID" : {
+    "61EDCD05-32BC-45F9-B5FC-7399064D582E" : 4306093812910066201
   }
 }
