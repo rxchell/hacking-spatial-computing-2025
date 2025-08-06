@@ -12,15 +12,17 @@ import SwiftUI
 struct Instruction: View {
     @State private var showInstructions = true
     @State private var showGame = false
-    
+    @State private var showResults = false
 
     var body: some View {
         if showInstructions {
             InstructionsView(showInstructions: $showInstructions)
         } else if showGame {
-                GameView()
+            GameView(showGame: $showGame, showResults: $showResults)
+        } else if showResults {
+            ResultsView()
         } else {
-                StartGameView(showGame: $showGame)
+            StartGameView(showGame: $showGame)
         }
     }
 }
@@ -79,6 +81,7 @@ struct StartGameView: View {
     
     func startCountdown() {
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+            // use timer if needed
             // Closure executed every time interval
             if countdown > 1 {
                 countdown -= 1
@@ -91,9 +94,46 @@ struct StartGameView: View {
 }
 
 struct GameView: View {
+    @Binding var showGame: Bool
+    @Binding var showResults: Bool
+    
+    @State private var gameTimer: Timer?
+    @State private var gameDuration: TimeInterval = 3
+    //@State private var gameStartTime: Date?
+    
     var body: some View {
-        Text("Game Started! Bubbles appears here.")
-            .font(.title2)
+        VStack {
+            Text("Game Started! Bubbles appears here.")
+                .font(.title)
+                .bold()
+        }
+        .onAppear() {
+                //gameStartTime = Date()
+                gameTimer = Timer.scheduledTimer(withTimeInterval: gameDuration, repeats: false) { _ in
+                    // do something, ignore input
+                    endGame()
+                }
+            }
+    }
+    
+    func endGame() {
+        gameTimer?.invalidate()
+        showGame = false
+        showResults = true
+    }
+}
+
+struct ResultsView: View {
+    var body: some View {
+        VStack(spacing: 24) {
+            Text("Game Over! Results appear here.")
+                .font(.title)
+                .bold()
+            Text("Average Reaction Time: ? seconds")
+            Text("Bubbles Touched: ?")
+            Text("Bubbles Missed: ?")
+        }
+        .padding()
     }
 }
 
