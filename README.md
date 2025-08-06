@@ -2,7 +2,8 @@
 Assessing Reaction Time using AppleVisionPro
 
 # Assesses Reaction Time
-In this challenge, the goal is to build an application that assesses reaction time
+In this challenge, the goal is to build an application that assesses reaction time.
+
 Potential Technologies: 
 - Hand tracking
 - Object manipulation
