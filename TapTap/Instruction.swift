@@ -32,7 +32,7 @@ struct InstructionsView: View {
     
     var body: some View {
         VStack(spacing: 24) {
-            Text("Tap Tap Instructions")
+            Text("TapTap Instructions")
                 .font(.title)
                 .fontWeight(.bold)
             
@@ -98,12 +98,12 @@ struct GameView: View {
     @Binding var showResults: Bool
     
     @State private var gameTimer: Timer?
-    @State private var gameDuration: TimeInterval = 3
+    @State private var gameDuration: TimeInterval = 30
     //@State private var gameStartTime: Date?
     
     var body: some View {
         VStack {
-            Text("Game Started! Bubbles appears here.")
+            Text("Game Started! Bubbles appear here.")
                 .font(.title)
                 .bold()
         }
@@ -129,9 +129,23 @@ struct ResultsView: View {
             Text("Game Over! Results appear here.")
                 .font(.title)
                 .bold()
-            Text("Average Reaction Time: ? seconds")
-            Text("Bubbles Touched: ?")
-            Text("Bubbles Missed: ?")
+            Text("=== Your TapTap Summary ===")
+            HStack {
+                Image(systemName: "timer")
+                Text("Average Reaction Time: ? seconds")
+            }
+            HStack {
+                Image(systemName: "bubbles.and.sparkles")
+                Text("Bubbles Touched: ?")
+            }
+            HStack {
+                Image(systemName: "engine.emission.and.exclamationmark")
+                Text("Bubbles Missed: ?")
+            }
+            HStack {
+                Image(systemName: "hand.rays")
+                Text("Accuracy: ?%")
+            }
         }
         .padding()
     }
