@@ -16,7 +16,7 @@ struct ContentView: View {
     var body: some View {
         Text("Launching...").task {
             await dismissImmersiveSpace()
-            openWindow(id: "InstructionsView")
+            openWindow(id: "HomeView")
         }
     }
 }

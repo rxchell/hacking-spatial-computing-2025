@@ -14,22 +14,26 @@ struct StartGameView: View {
     var body: some View {
         VStack(spacing: 32) {
             Text("Are You Ready?")
-                .font(.system(size: 50, weight: .bold))
-                .bold()
+                .font(.system(size: 90, weight: .bold, design: .rounded))
             
             Button("Start!") {
                 Task {
+                    SoundPlayer.playSound(named: "start")
                     dismissWindow(id: "StartGameView")
                     try? await openImmersiveSpace(id: "BubblesView")
                 }
             }
-            .font(.system(size: 40, weight: .semibold))
-            .padding(.horizontal, 40)
-            .padding(.vertical, 20)
-            .background(Color.black)
-            .foregroundColor(.white)
-            .cornerRadius(16)
+                .font(.system(size: 80, weight: .bold, design: .rounded))
+                .padding(.horizontal, 60)
+                .padding(.vertical, 40)
+                .background(Color.white)
+                .foregroundColor(.blue)
+                .cornerRadius(16)
+                .contentShape(Rectangle())
+                .padding(.all, 10)
+                .buttonStyle(.plain)
         }
-        .padding()
+        .padding(150)
+        .glassBackgroundEffect()
     }
 }

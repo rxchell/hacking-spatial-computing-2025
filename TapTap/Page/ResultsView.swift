@@ -8,40 +8,68 @@
 import SwiftUI
 
 struct ResultsView: View {
+    @EnvironmentObject var gameData: GameData
+    
     var body: some View {
-        VStack(spacing: 32) {
-            Text("Great job! 🎉 Thanks for playing TapTap.")
-                .font(.system(size: 50, weight: .bold))
+        VStack(spacing: 50) {
+            VStack(alignment: .center, spacing: 40) {
+                VStack(spacing: 10) {
+                    Text("Great job 🎉")
+                        .font(.system(size: 70, weight: .bold, design: .rounded))
+                        .multilineTextAlignment(.center)
+
+                    Text("Thank you for playing TapTap")
+                        .font(.system(size: 70, weight: .bold, design: .rounded))
+                        .multilineTextAlignment(.center)
+                }
+                .padding(.top)
+            }
             
-            Text("=== Your TapTap Summary ===")
-                .font(.system(size: 45, weight: .bold))
-                .padding(.bottom)
-            
-            HStack {
-                Image(systemName: "timer")
-                    .font(.system(size: 36, weight: .bold))
-                Text("Average Reaction Time: ? seconds")
-                    .font(.system(size: 40, weight: .bold))
+            VStack(alignment: .leading, spacing: 32) {
+                HStack(spacing: 30) {
+                    Image(systemName: "timer")
+                        .font(.system(size: 60, weight: .bold))
+                        .frame(width: 60)
+                    Text("Average Reaction Time:").resultLabelStyle()
+                    Text("\(averageTimer(timers: gameData.timeList)) seconds").resultValueStyle()
+                }
+                HStack(spacing: 30) {
+                    Image(systemName: "hand.rays")
+                        .font(.system(size: 60, weight: .bold))
+                        .frame(width: 60)
+                    Text("Balls Touched:").resultLabelStyle()
+                    Text("\(gameData.timeList.count)").resultValueStyle()
+                }
+                HStack(spacing: 30) {
+                    Image(systemName: "engine.emission.and.exclamationmark")
+                        .font(.system(size: 60, weight: .bold))
+                        .frame(width: 60)
+                    Text("Balls Missed:").resultLabelStyle()
+                    Text("\(15-gameData.timeList.count)").resultValueStyle()
+                }
+                HStack(spacing: 30) {
+                    Image(systemName: "checkmark.circle")
+                        .font(.system(size: 60, weight: .bold))
+                        .frame(width: 60)
+                    Text("Accuracy:").resultLabelStyle()
+                    Text("\(((Float(gameData.timeList.count))/15)*100) %").resultValueStyle()
+                }
             }
-            HStack {
-                Image(systemName: "bubbles.and.sparkles")
-                    .font(.system(size: 36, weight: .bold))
-                Text("Bubbles Touched: ?")
-                    .font(.system(size: 40, weight: .bold))
-            }
-            HStack {
-                Image(systemName: "engine.emission.and.exclamationmark")
-                    .font(.system(size: 36, weight: .bold))
-                Text("Bubbles Missed: ?")
-                    .font(.system(size: 40, weight: .bold))
-            }
-            HStack {
-                Image(systemName: "hand.rays")
-                    .font(.system(size: 36, weight: .bold))
-                Text("Accuracy: ?%")
-                    .font(.system(size: 40, weight: .bold))
+            .padding(150)
+            .glassBackgroundEffect()
+            .onAppear {
+                SoundPlayer.playSound(named: "great")
             }
         }
-        .padding(40)
     }
+}
+
+
+func averageTimer(timers: [Float]) -> Float {
+    var total: Float = 0
+    for t in timers {
+        total += t
+    }
+    
+    return timers.isEmpty ? 0 : total / Float(timers.count)
 }

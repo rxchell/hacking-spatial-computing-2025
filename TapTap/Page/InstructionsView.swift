@@ -13,17 +13,12 @@ struct InstructionsView: View {
     
     var body: some View {
         VStack(spacing: 32) {
-            Image(systemName: "hand.rays")
-                .font(.system(size: 45, weight: .bold))
-            Text("Welcome to TapTap")
-                .font(.system(size: 40, weight: .bold))
-            
             Text("""
-Tap the bubbles quickly!
-⏱ The game lasts 30 seconds.
-Do your best and have fun!
+Tap the balls quickly!
+The game lasts for 30 seconds.
+Do your best and have fun :)
 """)
-                .font(.system(size: 30, weight: .bold))
+                .font(.system(size: 66, weight: .bold, design: .rounded))
                 .multilineTextAlignment(.center)
                 .padding()
             
@@ -32,14 +27,20 @@ Do your best and have fun!
                 // Transition to game view
                 openWindow(id: "StartGameView")
             }
-            .font(.system(size: 40, weight: .semibold))
-            .padding(.horizontal, 50)
-            .padding(.vertical, 20)
-            .background(Color.black)
-            .foregroundColor(.white)
-            .cornerRadius(16)
+                .font(.system(size: 80, weight: .bold, design: .rounded))
+                .padding(.horizontal, 60)
+                .padding(.vertical, 40)
+                .background(Color.white)
+                .foregroundColor(.blue)
+                .cornerRadius(16)
+                .contentShape(Rectangle())
+                .padding(.all, 10)
+                .buttonStyle(.plain)
         }
-        .padding(40)
+        .padding(150)
         .glassBackgroundEffect()
+        .onAppear {
+            SoundPlayer.playSound(named: "ball")
+        }
     }
 }

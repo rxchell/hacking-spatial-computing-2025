@@ -9,10 +9,16 @@ import SwiftUI
 
 @main
 struct TapTapApp: App {
+    @StateObject private var gameData = GameData()
+    
     var body: some Scene {
         ImmersiveSpace() {
             ContentView()
         }
+        
+        WindowGroup(id: "HomeView") {
+            HomeView()
+        }.windowStyle(.volumetric)
         
         WindowGroup(id: "InstructionsView") {
             InstructionsView()
@@ -23,11 +29,11 @@ struct TapTapApp: App {
         }.windowStyle(.volumetric)
         
         ImmersiveSpace(id: "BubblesView") {
-            BubblesView()
+            BubblesView().environmentObject(gameData)
         }
         
         WindowGroup(id: "ResultsView") {
-            ResultsView()
+            ResultsView().environmentObject(gameData)
         }.windowStyle(.volumetric)
     }
 }
