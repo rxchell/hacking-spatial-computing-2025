@@ -176,53 +176,29 @@ struct ResultsView: View {
                     Image(systemName: "timer")
                         .font(.system(size: 60, weight: .bold))
                         .frame(width: 60)
-                    Text("Average Reaction Time:")
-                        .font(.system(size: 50, weight: .bold, design: .rounded))
-                    Text("? seconds")
-                        .font(.system(size: 50, weight: .bold, design: .rounded))
-                        .foregroundColor(.blue)
-                        .padding(20)
-                        .background(Color.white)
-                        .cornerRadius(16)
+                    Text("Average Reaction Time:").resultLabelStyle()
+                    Text("? seconds").resultValueStyle()
                 }
                 HStack(spacing: 30) {
                     Image(systemName: "hand.rays")
                         .font(.system(size: 60, weight: .bold))
                         .frame(width: 60)
-                    Text("Balls Touched:")
-                        .font(.system(size: 50, weight: .bold, design: .rounded))
-                    Text("?")
-                        .font(.system(size: 50, weight: .bold, design: .rounded))
-                        .foregroundColor(.blue)
-                        .padding(20)
-                        .background(Color.white)
-                        .cornerRadius(16)
+                    Text("Balls Touched:").resultLabelStyle()
+                    Text("?").resultValueStyle()
                 }
                 HStack(spacing: 30) {
                     Image(systemName: "engine.emission.and.exclamationmark")
                         .font(.system(size: 60, weight: .bold))
                         .frame(width: 60)
-                    Text("Balls Missed:")
-                        .font(.system(size: 50, weight: .bold, design: .rounded))
-                    Text("?")
-                        .font(.system(size: 50, weight: .bold, design: .rounded))
-                        .foregroundColor(.blue)
-                        .padding(20)
-                        .background(Color.white)
-                        .cornerRadius(16)
+                    Text("Balls Missed:").resultLabelStyle()
+                    Text("?").resultValueStyle()
                 }
                 HStack(spacing: 30) {
                     Image(systemName: "checkmark.circle")
                         .font(.system(size: 60, weight: .bold))
                         .frame(width: 60)
-                    Text("Accuracy:")
-                        .font(.system(size: 50, weight: .bold, design: .rounded))
-                    Text("? %")
-                        .font(.system(size: 50, weight: .bold, design: .rounded))
-                        .foregroundColor(.blue)
-                        .padding(20)
-                        .background(Color.white)
-                        .cornerRadius(16)
+                    Text("Accuracy:").resultLabelStyle()
+                    Text("? %").resultValueStyle()
                 }
             }
             .padding(150)
@@ -231,6 +207,23 @@ struct ResultsView: View {
                 SoundPlayer.playSound(named: "great")
             }
         }
+    }
+}
+
+extension Text {
+    func resultLabelStyle() -> some View {
+        self
+            .font(.system(size: 50, weight: .bold, design: .rounded))
+    }
+    
+    func resultValueStyle() -> some View {
+        self
+            .font(.system(size: 50, weight: .bold, design: .rounded))
+            .foregroundColor(.blue)
+            .padding(.vertical, 10)
+            .padding(.horizontal, 20)
+            .background(Color.white)
+            .cornerRadius(16)
     }
 }
 
