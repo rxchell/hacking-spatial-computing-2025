@@ -2,7 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSMainCameraUsageDescription</key>
+	<key>NSCameraUsageDescription</key>
 	<string>This app uses the camera to detect your surroundings.</string>
 	<key>NSWorldSensingUsageDescription</key>
 	<string>This app uses spatial awareness to anchor and track content.</string>
