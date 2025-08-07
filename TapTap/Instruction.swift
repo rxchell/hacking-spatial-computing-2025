@@ -78,11 +78,11 @@ Do your best and have fun :)
                 SoundPlayer.playSound(named: "go")
                 showInstructions = false
             }
-                .font(.system(size: 60, weight: .semibold, design: .rounded))
+                .font(.system(size: 80, weight: .bold, design: .rounded))
                 .padding(.horizontal, 60)
-                .padding(.vertical, 30)
-                .background(Color.black)
-                .foregroundColor(.white)
+                .padding(.vertical, 40)
+                .background(Color.white)
+                .foregroundColor(.blue)
                 .cornerRadius(16)
                 .contentShape(Rectangle())
                 .padding(.all, 10)
@@ -102,17 +102,17 @@ struct StartGameView: View {
     var body: some View {
         VStack(spacing: 32) {
             Text("Are You Ready?")
-                .font(.system(size: 65, weight: .bold, design: .rounded))
+                .font(.system(size: 90, weight: .bold, design: .rounded))
             
             Button("Start!") {
                 SoundPlayer.playSound(named: "start")
                 showGame = true
             }
-                .font(.system(size: 60, weight: .semibold, design: .rounded))
+                .font(.system(size: 80, weight: .bold, design: .rounded))
                 .padding(.horizontal, 60)
-                .padding(.vertical, 30)
-                .background(Color.black)
-                .foregroundColor(.white)
+                .padding(.vertical, 40)
+                .background(Color.white)
+                .foregroundColor(.blue)
                 .cornerRadius(16)
                 .contentShape(Rectangle())
                 .padding(.all, 10)
@@ -157,56 +157,79 @@ Just try your best and tap the balls.
 
 struct ResultsView: View {
     var body: some View {
-        VStack(spacing: 32) {
-            Text("""
-Great job 🎉 
-Thank you for playing TapTap
-""")
-                .font(.system(size: 65, weight: .bold, design: .rounded))
-                .multilineTextAlignment(.center)
-                .padding()
+        VStack(spacing: 50) {
+            VStack(alignment: .center, spacing: 40) {
+                VStack(spacing: 10) {
+                    Text("Great job 🎉")
+                        .font(.system(size: 70, weight: .bold, design: .rounded))
+                        .multilineTextAlignment(.center)
+
+                    Text("Thank you for playing TapTap")
+                        .font(.system(size: 70, weight: .bold, design: .rounded))
+                        .multilineTextAlignment(.center)
+                }
+                .padding(.top)
+            }
             
-            Text("=== Your TapTap Summary ===")
-                .font(.system(size: 60, weight: .bold, design: .rounded))
-                .padding(.bottom)
-            
-            HStack(spacing: 20) {
-                Image(systemName: "timer")
-                    .font(.system(size: 50, weight: .bold))
-                    .frame(width: 60)
-                Text("Average Reaction Time: ? seconds")
-                    .font(.system(size: 50, weight: .bold, design: .rounded))
-                    .multilineTextAlignment(.leading)
+            VStack(alignment: .leading, spacing: 32) {
+                HStack(spacing: 30) {
+                    Image(systemName: "timer")
+                        .font(.system(size: 60, weight: .bold))
+                        .frame(width: 60)
+                    Text("Average Reaction Time:")
+                        .font(.system(size: 50, weight: .bold, design: .rounded))
+                    Text("? seconds")
+                        .font(.system(size: 50, weight: .bold, design: .rounded))
+                        .foregroundColor(.blue)
+                        .padding(20)
+                        .background(Color.white)
+                        .cornerRadius(16)
+                }
+                HStack(spacing: 30) {
+                    Image(systemName: "hand.rays")
+                        .font(.system(size: 60, weight: .bold))
+                        .frame(width: 60)
+                    Text("Balls Touched:")
+                        .font(.system(size: 50, weight: .bold, design: .rounded))
+                    Text("?")
+                        .font(.system(size: 50, weight: .bold, design: .rounded))
+                        .foregroundColor(.blue)
+                        .padding(20)
+                        .background(Color.white)
+                        .cornerRadius(16)
+                }
+                HStack(spacing: 30) {
+                    Image(systemName: "engine.emission.and.exclamationmark")
+                        .font(.system(size: 60, weight: .bold))
+                        .frame(width: 60)
+                    Text("Balls Missed:")
+                        .font(.system(size: 50, weight: .bold, design: .rounded))
+                    Text("?")
+                        .font(.system(size: 50, weight: .bold, design: .rounded))
+                        .foregroundColor(.blue)
+                        .padding(20)
+                        .background(Color.white)
+                        .cornerRadius(16)
+                }
+                HStack(spacing: 30) {
+                    Image(systemName: "checkmark.circle")
+                        .font(.system(size: 60, weight: .bold))
+                        .frame(width: 60)
+                    Text("Accuracy:")
+                        .font(.system(size: 50, weight: .bold, design: .rounded))
+                    Text("? %")
+                        .font(.system(size: 50, weight: .bold, design: .rounded))
+                        .foregroundColor(.blue)
+                        .padding(20)
+                        .background(Color.white)
+                        .cornerRadius(16)
+                }
             }
-            HStack(spacing: 20) {
-                Image(systemName: "hand.rays")
-                    .font(.system(size: 50, weight: .bold))
-                    .frame(width: 60)
-                Text("Balls Touched: ?")
-                    .font(.system(size: 50, weight: .bold, design: .rounded))
-                    .multilineTextAlignment(.leading)
+            .padding(150)
+            .glassBackgroundEffect()
+            .onAppear {
+                SoundPlayer.playSound(named: "great")
             }
-            HStack(spacing: 20) {
-                Image(systemName: "engine.emission.and.exclamationmark")
-                    .font(.system(size: 50, weight: .bold))
-                    .frame(width: 60)
-                Text("Balls Missed: ?")
-                    .font(.system(size: 50, weight: .bold, design: .rounded))
-                    .multilineTextAlignment(.leading)
-            }
-            HStack(spacing: 20) {
-                Image(systemName: "checkmark.circle")
-                    .font(.system(size: 50, weight: .bold))
-                    .frame(width: 60)
-                Text("Accuracy: ?%")
-                    .font(.system(size: 50, weight: .bold, design: .rounded))
-                    .multilineTextAlignment(.leading)
-            }
-        }
-        .padding(150)
-        .glassBackgroundEffect()
-        .onAppear {
-            SoundPlayer.playSound(named: "great")
         }
     }
 }
