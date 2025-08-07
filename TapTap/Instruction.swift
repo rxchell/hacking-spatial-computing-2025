@@ -34,32 +34,6 @@ struct Instruction: View {
     }
 }
 
-struct HomePageView: View {
-    @Binding var showHome: Bool
-    @Binding var showInstructions: Bool
-    
-    var body: some View {
-        VStack(spacing: 32) {
-            Image(systemName: "hand.rays")
-                .font(.system(size: 80, weight: .bold))
-            
-            Text("Welcome to TapTap")
-                .font(.system(size: 70, weight: .bold, design: .rounded))
-                .multilineTextAlignment(.center)
-                .padding()
-        }
-        .padding(150)
-        .glassBackgroundEffect()
-        .onAppear {
-            SoundPlayer.playSound(named: "tap")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                showHome = false
-                showInstructions = true
-            }
-        }
-    }
-}
-
 struct InstructionsView: View {
     @Binding var showInstructions: Bool
     
