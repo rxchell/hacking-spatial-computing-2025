@@ -14,5 +14,10 @@ struct TapTapApp: App {
             ContentView()
         }
         .windowStyle(.volumetric)
+        
+        // The immersive space that defines `HeadPositionView`.
+        ImmersiveSpace(id: "HandTrackingScene") {
+            HandTrackingView()
+        }
     }
 }

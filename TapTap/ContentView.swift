@@ -12,8 +12,17 @@ import RealityKitContent
 struct ContentView: View {
 
     @State var enlarge = false
+    
+    /// The environment value to get the `OpenImmersiveSpaceAction` instance.
+    @Environment(\.openImmersiveSpace) var openImmersiveSpace
 
     var body: some View {
+        Text("Hand Tracking Enabled")
+            .onAppear {
+                Task {
+                    await openImmersiveSpace(id: "HandTrackingScene")
+                }
+            }
         VStack {
             RealityView { content in
                 // Add the initial RealityKit content
