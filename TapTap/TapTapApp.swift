@@ -10,13 +10,24 @@ import SwiftUI
 @main
 struct TapTapApp: App {
     var body: some Scene {
-        ImmersiveSpace(id: "ContentView") {
+        ImmersiveSpace() {
             ContentView()
         }
-        WindowGroup(id: "Content") {
-            ContentView()
-        }
-        .windowStyle(.volumetric)
         
+        WindowGroup(id: "InstructionsView") {
+            InstructionsView()
+        }.windowStyle(.volumetric)
+        
+        WindowGroup(id: "StartGameView") {
+            StartGameView()
+        }.windowStyle(.volumetric)
+        
+        ImmersiveSpace(id: "BubblesView") {
+            BubblesView()
+        }
+        
+        WindowGroup(id: "ResultsView") {
+            ResultsView()
+        }.windowStyle(.volumetric)
     }
 }
