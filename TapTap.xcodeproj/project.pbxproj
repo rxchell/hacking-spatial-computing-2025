@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		810F00462E42F7C300C2669B /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = 810F00452E42F7C300C2669B /* RealityKitContent */; };
+		A7A57C7D2E44684A00440924 /* background.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A7A57C7C2E44684A00440924 /* background.mp3 */; };
+		A7A57C7F2E447CE000440924 /* go.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A7A57C7E2E447CE000440924 /* go.mp3 */; };
+		A7A57C812E447CF400440924 /* start.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A7A57C802E447CF400440924 /* start.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,6 +27,9 @@
 		810F00402E42F7C300C2669B /* TapTap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapTap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		810F00442E42F7C300C2669B /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
 		810F00522E42F7C500C2669B /* TapTapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TapTapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7A57C7C2E44684A00440924 /* background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = background.mp3; sourceTree = "<group>"; };
+		A7A57C7E2E447CE000440924 /* go.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = go.mp3; sourceTree = "<group>"; };
+		A7A57C802E447CF400440924 /* start.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = start.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -74,6 +80,7 @@
 		810F00372E42F7C300C2669B = {
 			isa = PBXGroup;
 			children = (
+				A7A57C7B2E4467E800440924 /* Resources */,
 				810F00422E42F7C300C2669B /* TapTap */,
 				810F00432E42F7C300C2669B /* Packages */,
 				810F00552E42F7C500C2669B /* TapTapTests */,
@@ -96,6 +103,16 @@
 				810F00442E42F7C300C2669B /* RealityKitContent */,
 			);
 			path = Packages;
+			sourceTree = "<group>";
+		};
+		A7A57C7B2E4467E800440924 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A7A57C7C2E44684A00440924 /* background.mp3 */,
+				A7A57C7E2E447CE000440924 /* go.mp3 */,
+				A7A57C802E447CF400440924 /* start.mp3 */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,6 +208,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7A57C7D2E44684A00440924 /* background.mp3 in Resources */,
+				A7A57C812E447CF400440924 /* start.mp3 in Resources */,
+				A7A57C7F2E447CE000440924 /* go.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

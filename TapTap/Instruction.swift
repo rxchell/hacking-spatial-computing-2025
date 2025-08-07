@@ -6,8 +6,7 @@
 //
 
 import SwiftUI
-//import RealityKit
-//import RealityKitContent
+import AVFoundation
 
 struct Instruction: View {
     @State private var showInstructions = true
@@ -15,14 +14,56 @@ struct Instruction: View {
     @State private var showResults = false
 
     var body: some View {
-        if showInstructions {
-            InstructionsView(showInstructions: $showInstructions)
-        } else if showGame {
-            GameView(showGame: $showGame, showResults: $showResults)
-        } else if showResults {
-            ResultsView()
-        } else {
-            StartGameView(showGame: $showGame)
+        Group {
+            if showInstructions {
+                InstructionsView(showInstructions: $showInstructions)
+            } else if showGame {
+                GameView(showGame: $showGame, showResults: $showResults)
+            } else if showResults {
+                ResultsView()
+            } else {
+                StartGameView(showGame: $showGame)
+            }
+        }
+        .onAppear {
+            SoundPlayer.playBackgroundMusic(named: "background")
+        }
+    }
+}
+
+class SoundPlayer {
+    static var backgroundPlayer: AVAudioPlayer?
+    static var buttonPlayer: AVAudioPlayer?
+    
+    static func playBackgroundMusic(named name: String) {
+        guard let url = Bundle.main.url(forResource: name, withExtension: "mp3") else {
+            print( "Background music file not found.")
+            return
+        }
+        
+        do {
+            backgroundPlayer = try AVAudioPlayer(contentsOf: url)
+            backgroundPlayer?.numberOfLoops = -1 // infinite loop
+            backgroundPlayer?.volume = 0.4
+            backgroundPlayer?.play()
+        } catch {
+            print("Error playing background music: \(error.localizedDescription)")
+        }
+    }
+    
+    static func playSound(named name: String) {
+        guard let url = Bundle.main.url(forResource: name, withExtension: "mp3") else {
+            print( "Sound file not found.")
+            return
+        }
+        
+        do {
+            buttonPlayer = try AVAudioPlayer(contentsOf: url)
+            buttonPlayer?.volume = 1.0
+            buttonPlayer?.prepareToPlay()
+            buttonPlayer?.play()
+        } catch {
+            print("Error playing sound: \(error.localizedDescription)")
         }
     }
 }
@@ -47,16 +88,17 @@ Do your best and have fun :)
                 .padding()
             
             Button("Go!") {
+                SoundPlayer.playSound(named: "go")
                 showInstructions = false
             }
-            .font(.system(size: 40, weight: .semibold, design: .rounded))
-            .padding(.horizontal, 50)
-            .padding(.vertical, 20)
-            .background(Color.black)
-            .foregroundColor(.white)
-            .cornerRadius(16)
-            .contentShape(Rectangle())
-            .padding(.all, 10)
+                .font(.system(size: 40, weight: .semibold, design: .rounded))
+                .padding(.horizontal, 50)
+                .padding(.vertical, 20)
+                .background(Color.black)
+                .foregroundColor(.white)
+                .cornerRadius(16)
+                .contentShape(Rectangle())
+                .padding(.all, 10)
         }
         .padding(40)
         .glassBackgroundEffect()
@@ -72,16 +114,17 @@ struct StartGameView: View {
                 .font(.system(size: 50, weight: .bold, design: .rounded))
             
             Button("Start!") {
+                SoundPlayer.playSound(named: "start")
                 showGame = true
             }
-            .font(.system(size: 40, weight: .semibold, design: .rounded))
-            .padding(.horizontal, 50)
-            .padding(.vertical, 20)
-            .background(Color.black)
-            .foregroundColor(.white)
-            .cornerRadius(16)
-            .contentShape(Rectangle())
-            .padding(.all, 10)
+                .font(.system(size: 40, weight: .semibold, design: .rounded))
+                .padding(.horizontal, 50)
+                .padding(.vertical, 20)
+                .background(Color.black)
+                .foregroundColor(.white)
+                .cornerRadius(16)
+                .contentShape(Rectangle())
+                .padding(.all, 10)
         }
         .padding()
     }
@@ -92,7 +135,7 @@ struct GameView: View {
     @Binding var showResults: Bool
     
     @State private var gameTimer: Timer?
-    @State private var gameDuration: TimeInterval = 3
+    @State private var gameDuration: TimeInterval = 30
     
     var body: some View {
         VStack {
