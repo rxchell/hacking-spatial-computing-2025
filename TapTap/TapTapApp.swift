@@ -10,7 +10,10 @@ import SwiftUI
 @main
 struct TapTapApp: App {
     var body: some Scene {
-        WindowGroup {
+        ImmersiveSpace(id: "ContentView") {
+            ContentView()
+        }
+        WindowGroup(id: "Content") {
             ContentView()
         }
         .windowStyle(.volumetric)
