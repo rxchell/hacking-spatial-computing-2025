@@ -14,15 +14,9 @@ struct ContentView: View {
     @State var enlarge = false
     
     /// The environment value to get the `OpenImmersiveSpaceAction` instance.
-    @Environment(\.openImmersiveSpace) var openImmersiveSpace
+    //@Environment(\.openImmersiveSpace) var openImmersiveSpace
 
     var body: some View {
-        Text("Hand Tracking Enabled")
-            .onAppear {
-                Task {
-                    await openImmersiveSpace(id: "HandTrackingScene")
-                }
-            }
         VStack {
             RealityView { content in
                 let anchor = AnchorEntity(world: .zero)
@@ -53,6 +47,12 @@ struct ContentView: View {
                     }
                 }
             }
+//            Text("Hand Tracking Enabled")
+//                .onAppear {
+//                    Task {
+//                        await openImmersiveSpace(id: "HandTrackingScene")
+//                    }
+//                }
         }
     }
 }

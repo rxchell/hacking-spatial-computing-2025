@@ -10,17 +10,18 @@ import SwiftUI
 @main
 struct TapTapApp: App {
     var body: some Scene {
-        ImmersiveSpace(id: "ContentView") {
-            ContentView()
+        WindowGroup {
+            Instruction()
         }
-        WindowGroup(id: "Content") {
-            ContentView()
+
+        ImmersiveSpace(id: "ImmersiveGame") {
+            ImmersiveGameView() // Only the game view with bubbles goes here
         }
-        .windowStyle(.volumetric)
         
         // The immersive space that defines `HeadPositionView`.
-        ImmersiveSpace(id: "HandTrackingScene") {
-            HandTrackingView()
-        }
+        //        ImmersiveSpace(id: "HandTrackingScene") {
+        //            HandTrackingView()
+        //        }
     }
 }
+
