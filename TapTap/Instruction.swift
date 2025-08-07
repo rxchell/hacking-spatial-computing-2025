@@ -31,65 +31,57 @@ struct InstructionsView: View {
     @Binding var showInstructions: Bool
     
     var body: some View {
-        VStack(spacing: 24) {
-            Text("TapTap Instructions")
-                .font(.title)
-                .fontWeight(.bold)
+        VStack(spacing: 32) {
+            Image(systemName: "hand.rays")
+                .font(.system(size: 45, weight: .bold))
+            Text("Welcome to TapTap")
+                .font(.system(size: 40, weight: .bold))
             
             Text("""
-Touch the bubbles as fast as you can!
-The game lasts for 30 seconds.
-Tap the Go! button to start.
+Tap the bubbles quickly!
+⏱ The game lasts 30 seconds.
+Do your best and have fun!
 """)
-                .font(.body)
+                .font(.system(size: 30, weight: .bold))
                 .multilineTextAlignment(.center)
                 .padding()
             
-            Button(action: {
+            Button("Go!") {
                 // Transition to game view
                 showInstructions = false
-            }) {
-                Text("Go!")
-                    .font(.title2)
-                    .padding()
-                    .foregroundColor(.white)
-                    .cornerRadius(12)
             }
+            .font(.system(size: 40, weight: .semibold))
+            .padding(.horizontal, 50)
+            .padding(.vertical, 20)
+            .background(Color.black)
+            .foregroundColor(.white)
+            .cornerRadius(16)
         }
-        .padding()
+        .padding(40)
         .glassBackgroundEffect()
     }
 }
 
 struct StartGameView: View {
     @Binding var showGame: Bool
-    @State private var countdown = 3
     
     var body: some View {
-        VStack(spacing: 20) {
-            Text("Get Ready!")
-                .font(.largeTitle)
-            
-            Text("\(countdown)")
-                .font(.system(size: 72))
+        VStack(spacing: 32) {
+            Text("Are You Ready?")
+                .font(.system(size: 50, weight: .bold))
                 .bold()
-                .onAppear(){
-                    startCountdown()
-                }
-        }
-    }
-    
-    func startCountdown() {
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-            // use timer if needed
-            // Closure executed every time interval
-            if countdown > 1 {
-                countdown -= 1
-            } else {
-                timer.invalidate()
+            
+            Button("Start!") {
                 showGame = true
             }
+            .font(.system(size: 40, weight: .semibold))
+            .padding(.horizontal, 40)
+            .padding(.vertical, 20)
+            .background(Color.black)
+            .foregroundColor(.white)
+            .cornerRadius(16)
         }
+        .padding()
     }
 }
 
@@ -99,16 +91,18 @@ struct GameView: View {
     
     @State private var gameTimer: Timer?
     @State private var gameDuration: TimeInterval = 30
-    //@State private var gameStartTime: Date?
     
     var body: some View {
         VStack {
-            Text("Game Started! Bubbles appear here.")
-                .font(.title)
-                .bold()
+            Text("""
+Don't worry :)
+Just try your best and tap the bubbles.
+""")
+                .font(.system(size: 50, weight: .bold))
+                .multilineTextAlignment(.center)
+                .padding()
         }
         .onAppear() {
-                //gameStartTime = Date()
                 gameTimer = Timer.scheduledTimer(withTimeInterval: gameDuration, repeats: false) { _ in
                     // do something, ignore input
                     endGame()
@@ -125,29 +119,40 @@ struct GameView: View {
 
 struct ResultsView: View {
     var body: some View {
-        VStack(spacing: 24) {
-            Text("Game Over! Results appear here.")
-                .font(.title)
-                .bold()
+        VStack(spacing: 32) {
+            Text("Great job! 🎉 Thanks for playing TapTap.")
+                .font(.system(size: 50, weight: .bold))
+            
             Text("=== Your TapTap Summary ===")
+                .font(.system(size: 45, weight: .bold))
+                .padding(.bottom)
+            
             HStack {
                 Image(systemName: "timer")
+                    .font(.system(size: 36, weight: .bold))
                 Text("Average Reaction Time: ? seconds")
+                    .font(.system(size: 40, weight: .bold))
             }
             HStack {
                 Image(systemName: "bubbles.and.sparkles")
+                    .font(.system(size: 36, weight: .bold))
                 Text("Bubbles Touched: ?")
+                    .font(.system(size: 40, weight: .bold))
             }
             HStack {
                 Image(systemName: "engine.emission.and.exclamationmark")
+                    .font(.system(size: 36, weight: .bold))
                 Text("Bubbles Missed: ?")
+                    .font(.system(size: 40, weight: .bold))
             }
             HStack {
                 Image(systemName: "hand.rays")
+                    .font(.system(size: 36, weight: .bold))
                 Text("Accuracy: ?%")
+                    .font(.system(size: 40, weight: .bold))
             }
         }
-        .padding()
+        .padding(40)
     }
 }
 
