@@ -11,6 +11,9 @@
 		A7A57C7D2E44684A00440924 /* background.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A7A57C7C2E44684A00440924 /* background.mp3 */; };
 		A7A57C7F2E447CE000440924 /* go.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A7A57C7E2E447CE000440924 /* go.mp3 */; };
 		A7A57C812E447CF400440924 /* start.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A7A57C802E447CF400440924 /* start.mp3 */; };
+		A7A57C8F2E44BEDF00440924 /* tap.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A7A57C8E2E44BEDF00440924 /* tap.mp3 */; };
+		A7A57C932E44BF6200440924 /* great.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A7A57C922E44BF6200440924 /* great.mp3 */; };
+		A7A57C952E44C3A800440924 /* ball.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A7A57C942E44C3A800440924 /* ball.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,6 +33,9 @@
 		A7A57C7C2E44684A00440924 /* background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = background.mp3; sourceTree = "<group>"; };
 		A7A57C7E2E447CE000440924 /* go.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = go.mp3; sourceTree = "<group>"; };
 		A7A57C802E447CF400440924 /* start.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = start.mp3; sourceTree = "<group>"; };
+		A7A57C8E2E44BEDF00440924 /* tap.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tap.mp3; sourceTree = "<group>"; };
+		A7A57C922E44BF6200440924 /* great.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = great.mp3; sourceTree = "<group>"; };
+		A7A57C942E44C3A800440924 /* ball.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ball.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -111,6 +117,9 @@
 				A7A57C7C2E44684A00440924 /* background.mp3 */,
 				A7A57C7E2E447CE000440924 /* go.mp3 */,
 				A7A57C802E447CF400440924 /* start.mp3 */,
+				A7A57C8E2E44BEDF00440924 /* tap.mp3 */,
+				A7A57C922E44BF6200440924 /* great.mp3 */,
+				A7A57C942E44C3A800440924 /* ball.mp3 */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -210,6 +219,9 @@
 			files = (
 				A7A57C7D2E44684A00440924 /* background.mp3 in Resources */,
 				A7A57C812E447CF400440924 /* start.mp3 in Resources */,
+				A7A57C952E44C3A800440924 /* ball.mp3 in Resources */,
+				A7A57C8F2E44BEDF00440924 /* tap.mp3 in Resources */,
+				A7A57C932E44BF6200440924 /* great.mp3 in Resources */,
 				A7A57C7F2E447CE000440924 /* go.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

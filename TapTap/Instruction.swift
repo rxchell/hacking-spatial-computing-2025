@@ -9,13 +9,16 @@ import SwiftUI
 import AVFoundation
 
 struct Instruction: View {
-    @State private var showInstructions = true
+    @State private var showHome = true
+    @State private var showInstructions = false
     @State private var showGame = false
     @State private var showResults = false
 
     var body: some View {
         Group {
-            if showInstructions {
+            if showHome {
+                HomePageView(showHome: $showHome, showInstructions: $showInstructions)
+            } else if showInstructions {
                 InstructionsView(showInstructions: $showInstructions)
             } else if showGame {
                 GameView(showGame: $showGame, showResults: $showResults)
@@ -31,39 +34,28 @@ struct Instruction: View {
     }
 }
 
-class SoundPlayer {
-    static var backgroundPlayer: AVAudioPlayer?
-    static var buttonPlayer: AVAudioPlayer?
+struct HomePageView: View {
+    @Binding var showHome: Bool
+    @Binding var showInstructions: Bool
     
-    static func playBackgroundMusic(named name: String) {
-        guard let url = Bundle.main.url(forResource: name, withExtension: "mp3") else {
-            print( "Background music file not found.")
-            return
+    var body: some View {
+        VStack(spacing: 32) {
+            Image(systemName: "hand.rays")
+                .font(.system(size: 80, weight: .bold))
+            
+            Text("Welcome to TapTap")
+                .font(.system(size: 70, weight: .bold, design: .rounded))
+                .multilineTextAlignment(.center)
+                .padding()
         }
-        
-        do {
-            backgroundPlayer = try AVAudioPlayer(contentsOf: url)
-            backgroundPlayer?.numberOfLoops = -1 // infinite loop
-            backgroundPlayer?.volume = 0.4
-            backgroundPlayer?.play()
-        } catch {
-            print("Error playing background music: \(error.localizedDescription)")
-        }
-    }
-    
-    static func playSound(named name: String) {
-        guard let url = Bundle.main.url(forResource: name, withExtension: "mp3") else {
-            print( "Sound file not found.")
-            return
-        }
-        
-        do {
-            buttonPlayer = try AVAudioPlayer(contentsOf: url)
-            buttonPlayer?.volume = 1.0
-            buttonPlayer?.prepareToPlay()
-            buttonPlayer?.play()
-        } catch {
-            print("Error playing sound: \(error.localizedDescription)")
+        .padding(150)
+        .glassBackgroundEffect()
+        .onAppear {
+            SoundPlayer.playSound(named: "tap")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                showHome = false
+                showInstructions = true
+            }
         }
     }
 }
@@ -73,17 +65,12 @@ struct InstructionsView: View {
     
     var body: some View {
         VStack(spacing: 32) {
-            Image(systemName: "hand.rays")
-                .font(.system(size: 45, weight: .bold))
-            Text("Welcome to TapTap")
-                .font(.system(size: 50, weight: .bold, design: .rounded))
-            
             Text("""
-Tap the bubbles quickly!
-The game lasts 30 seconds.
+Tap the balls quickly!
+The game lasts for 30 seconds.
 Do your best and have fun :)
 """)
-                .font(.system(size: 35, weight: .bold, design: .rounded))
+                .font(.system(size: 66, weight: .bold, design: .rounded))
                 .multilineTextAlignment(.center)
                 .padding()
             
@@ -91,17 +78,21 @@ Do your best and have fun :)
                 SoundPlayer.playSound(named: "go")
                 showInstructions = false
             }
-                .font(.system(size: 40, weight: .semibold, design: .rounded))
-                .padding(.horizontal, 50)
-                .padding(.vertical, 20)
+                .font(.system(size: 60, weight: .semibold, design: .rounded))
+                .padding(.horizontal, 60)
+                .padding(.vertical, 30)
                 .background(Color.black)
                 .foregroundColor(.white)
                 .cornerRadius(16)
                 .contentShape(Rectangle())
                 .padding(.all, 10)
+                .buttonStyle(.plain)
         }
-        .padding(40)
+        .padding(150)
         .glassBackgroundEffect()
+        .onAppear {
+            SoundPlayer.playSound(named: "ball")
+        }
     }
 }
 
@@ -111,22 +102,24 @@ struct StartGameView: View {
     var body: some View {
         VStack(spacing: 32) {
             Text("Are You Ready?")
-                .font(.system(size: 50, weight: .bold, design: .rounded))
+                .font(.system(size: 65, weight: .bold, design: .rounded))
             
             Button("Start!") {
                 SoundPlayer.playSound(named: "start")
                 showGame = true
             }
-                .font(.system(size: 40, weight: .semibold, design: .rounded))
-                .padding(.horizontal, 50)
-                .padding(.vertical, 20)
+                .font(.system(size: 60, weight: .semibold, design: .rounded))
+                .padding(.horizontal, 60)
+                .padding(.vertical, 30)
                 .background(Color.black)
                 .foregroundColor(.white)
                 .cornerRadius(16)
                 .contentShape(Rectangle())
                 .padding(.all, 10)
+                .buttonStyle(.plain)
         }
-        .padding()
+        .padding(150)
+        .glassBackgroundEffect()
     }
 }
 
@@ -141,9 +134,9 @@ struct GameView: View {
         VStack {
             Text("""
 Don't worry :)
-Just try your best and tap the bubbles.
+Just try your best and tap the balls.
 """)
-                .font(.system(size: 45, weight: .bold, design: .rounded))
+                .font(.system(size: 65, weight: .bold, design: .rounded))
                 .multilineTextAlignment(.center)
                 .padding()
         }
@@ -165,39 +158,56 @@ Just try your best and tap the bubbles.
 struct ResultsView: View {
     var body: some View {
         VStack(spacing: 32) {
-            Text("Great job! 🎉 Thanks for playing TapTap.")
-                .font(.system(size: 50, weight: .bold, design: .rounded))
+            Text("""
+Great job 🎉 
+Thank you for playing TapTap
+""")
+                .font(.system(size: 65, weight: .bold, design: .rounded))
+                .multilineTextAlignment(.center)
+                .padding()
             
-            Text("===== Your TapTap Summary =====")
-                .font(.system(size: 45, weight: .bold, design: .rounded))
+            Text("=== Your TapTap Summary ===")
+                .font(.system(size: 60, weight: .bold, design: .rounded))
                 .padding(.bottom)
             
-            HStack {
+            HStack(spacing: 20) {
                 Image(systemName: "timer")
-                    .font(.system(size: 36, weight: .bold))
+                    .font(.system(size: 50, weight: .bold))
+                    .frame(width: 60)
                 Text("Average Reaction Time: ? seconds")
-                    .font(.system(size: 40, weight: .bold, design: .rounded))
+                    .font(.system(size: 50, weight: .bold, design: .rounded))
+                    .multilineTextAlignment(.leading)
             }
-            HStack {
-                Image(systemName: "bubbles.and.sparkles")
-                    .font(.system(size: 36, weight: .bold))
-                Text("Bubbles Touched: ?")
-                    .font(.system(size: 40, weight: .bold, design: .rounded))
-            }
-            HStack {
-                Image(systemName: "engine.emission.and.exclamationmark")
-                    .font(.system(size: 36, weight: .bold))
-                Text("Bubbles Missed: ?")
-                    .font(.system(size: 40, weight: .bold, design: .rounded))
-            }
-            HStack {
+            HStack(spacing: 20) {
                 Image(systemName: "hand.rays")
-                    .font(.system(size: 36, weight: .bold))
+                    .font(.system(size: 50, weight: .bold))
+                    .frame(width: 60)
+                Text("Balls Touched: ?")
+                    .font(.system(size: 50, weight: .bold, design: .rounded))
+                    .multilineTextAlignment(.leading)
+            }
+            HStack(spacing: 20) {
+                Image(systemName: "engine.emission.and.exclamationmark")
+                    .font(.system(size: 50, weight: .bold))
+                    .frame(width: 60)
+                Text("Balls Missed: ?")
+                    .font(.system(size: 50, weight: .bold, design: .rounded))
+                    .multilineTextAlignment(.leading)
+            }
+            HStack(spacing: 20) {
+                Image(systemName: "checkmark.circle")
+                    .font(.system(size: 50, weight: .bold))
+                    .frame(width: 60)
                 Text("Accuracy: ?%")
-                    .font(.system(size: 40, weight: .bold, design: .rounded))
+                    .font(.system(size: 50, weight: .bold, design: .rounded))
+                    .multilineTextAlignment(.leading)
             }
         }
-        .padding(40)
+        .padding(150)
+        .glassBackgroundEffect()
+        .onAppear {
+            SoundPlayer.playSound(named: "great")
+        }
     }
 }
 
