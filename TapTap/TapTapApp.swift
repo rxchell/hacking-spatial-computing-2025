@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct TapTapApp: App {
     @StateObject private var gameData = GameData()
-    
+        
     var body: some Scene {
         ImmersiveSpace() {
             ContentView()

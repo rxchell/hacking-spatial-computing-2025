@@ -17,10 +17,12 @@ struct StartGameView: View {
                 .font(.system(size: 90, weight: .bold, design: .rounded))
             
             Button("Start!") {
+                SoundPlayer.playSound(named: "start")
                 Task {
-                    SoundPlayer.playSound(named: "start")
-                    dismissWindow(id: "StartGameView")
+                    try? await Task.sleep(for: .seconds(3))
                     try? await openImmersiveSpace(id: "BubblesView")
+                    try? await Task.sleep(for: .seconds(0.5))
+                    dismissWindow(id: "StartGameView")
                 }
             }
                 .font(.system(size: 80, weight: .bold, design: .rounded))
@@ -35,5 +37,9 @@ struct StartGameView: View {
         }
         .padding(150)
         .glassBackgroundEffect()
+        .onAppear{
+            SoundPlayer.playSound(named: "start")
+            SoundPlayer.playBackgroundMusic(named: "background")
+        }
     }
 }

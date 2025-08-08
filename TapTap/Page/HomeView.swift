@@ -23,12 +23,12 @@ struct HomeView: View {
         }
         .padding(150)
         .glassBackgroundEffect()
-        .onAppear {
+        .task {
             SoundPlayer.playSound(named: "tap")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                dismissWindow(id: "HomeView")
-                openWindow(id: "InstructionsView")
-            }
+            try? await Task.sleep(for: .seconds(3))
+            openWindow(id: "InstructionsView")
+            try? await Task.sleep(for: .seconds(0.5))
+            dismissWindow(id: "HomeView")
         }
     }
 }
