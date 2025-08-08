@@ -48,6 +48,26 @@ struct ResultsView: View {
                     Text("\(gameData.totalSpawn-gameData.timeList.count)").resultValueStyle()
                 }
                 HStack(spacing: 30) {
+                    HStack {
+                        HStack(spacing: 30) {
+                            Text("Right Balls:").resultLabelStyle()
+                            Text("\(gameData.rightCount)/\(gameData.right)").resultValueStyle()
+                        }
+                    }
+                    HStack {
+                        HStack(spacing: 30) {
+                            Text("Middle Balls:").resultLabelStyle()
+                            Text("\(gameData.middleCount)/\(gameData.middle)").resultValueStyle()
+                        }
+                    }
+                    HStack {
+                        HStack(spacing: 30) {
+                            Text("Left Balls:").resultLabelStyle()
+                            Text("\(gameData.leftCount)/\(gameData.left)").resultValueStyle()
+                        }
+                    }
+                }
+                HStack(spacing: 30) {
                     Image(systemName: "checkmark.circle")
                         .font(.system(size: 60, weight: .bold))
                         .frame(width: 60)

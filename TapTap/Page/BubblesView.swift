@@ -46,7 +46,7 @@ struct BubblesView: View {
                                 let spawnTime = Date()
                                 
                                 let x = Float.random(in: -0.5...0.5)
-                                let y = Float.random(in: 1.2...2.2)
+                                let y = Float.random(in: 1.5...2.0)
                                 
                                 orbClone.transform = Transform(
                                     scale: .one,
