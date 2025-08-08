@@ -11,15 +11,15 @@ struct ResultsView: View {
     @EnvironmentObject var gameData: GameData
     
     var body: some View {
-        VStack(spacing: 50) {
+        VStack(spacing: 30) {
             VStack(alignment: .center, spacing: 40) {
                 VStack(spacing: 10) {
                     Text("Great job 🎉")
-                        .font(.system(size: 70, weight: .bold, design: .rounded))
+                        .font(.system(size: 50, weight: .bold, design: .rounded))
                         .multilineTextAlignment(.center)
 
                     Text("Thank you for playing TapTap")
-                        .font(.system(size: 70, weight: .bold, design: .rounded))
+                        .font(.system(size: 50, weight: .bold, design: .rounded))
                         .multilineTextAlignment(.center)
                 }
                 .padding(.top)
@@ -28,21 +28,21 @@ struct ResultsView: View {
             VStack(alignment: .leading, spacing: 32) {
                 HStack(spacing: 30) {
                     Image(systemName: "timer")
-                        .font(.system(size: 60, weight: .bold))
+                        .font(.system(size: 40, weight: .bold))
                         .frame(width: 60)
                     Text("Average Reaction Time:").resultLabelStyle()
                     Text("\(averageTimer(timers: gameData.timeList), specifier: "%.2f") seconds").resultValueStyle()
                 }
                 HStack(spacing: 30) {
                     Image(systemName: "hand.rays")
-                        .font(.system(size: 60, weight: .bold))
+                        .font(.system(size: 40, weight: .bold))
                         .frame(width: 60)
                     Text("Balls Touched:").resultLabelStyle()
                     Text("\(gameData.timeList.count)").resultValueStyle()
                 }
                 HStack(spacing: 30) {
                     Image(systemName: "engine.emission.and.exclamationmark")
-                        .font(.system(size: 60, weight: .bold))
+                        .font(.system(size: 40, weight: .bold))
                         .frame(width: 60)
                     Text("Balls Missed:").resultLabelStyle()
                     Text("\(gameData.totalSpawn-gameData.timeList.count)").resultValueStyle()
@@ -69,7 +69,7 @@ struct ResultsView: View {
                 }
                 HStack(spacing: 30) {
                     Image(systemName: "checkmark.circle")
-                        .font(.system(size: 60, weight: .bold))
+                        .font(.system(size: 40, weight: .bold))
                         .frame(width: 60)
                     Text("Accuracy:").resultLabelStyle()
                     let accuracy = (Float(gameData.timeList.count) / Float(gameData.totalSpawn)) * 100
