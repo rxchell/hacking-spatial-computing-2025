@@ -45,14 +45,14 @@ struct ResultsView: View {
                         .font(.system(size: 60, weight: .bold))
                         .frame(width: 60)
                     Text("Balls Missed:").resultLabelStyle()
-                    Text("\(15-gameData.timeList.count)").resultValueStyle()
+                    Text("\(gameData.totalSpawn-gameData.timeList.count)").resultValueStyle()
                 }
                 HStack(spacing: 30) {
                     Image(systemName: "checkmark.circle")
                         .font(.system(size: 60, weight: .bold))
                         .frame(width: 60)
                     Text("Accuracy:").resultLabelStyle()
-                    Text("\(((Float(gameData.timeList.count))/15)*100) %").resultValueStyle()
+                    Text("\(((Float(gameData.timeList.count))/gameData.totalSpawn)*100) %").resultValueStyle()
                 }
             }
             .padding(150)
