@@ -52,7 +52,8 @@ struct ResultsView: View {
                         .font(.system(size: 60, weight: .bold))
                         .frame(width: 60)
                     Text("Accuracy:").resultLabelStyle()
-                    Text("\(((Float(gameData.timeList.count))/gameData.totalSpawn)*100) %").resultValueStyle()
+                    let accuracy = (Float(gameData.timeList.count) / Float(gameData.totalSpawn)) * 100
+                        Text("\(accuracy) %").resultValueStyle()
                 }
             }
             .padding(150)
