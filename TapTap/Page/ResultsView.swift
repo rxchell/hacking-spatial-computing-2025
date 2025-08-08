@@ -31,7 +31,7 @@ struct ResultsView: View {
                         .font(.system(size: 60, weight: .bold))
                         .frame(width: 60)
                     Text("Average Reaction Time:").resultLabelStyle()
-                    Text("\(averageTimer(timers: gameData.timeList)) seconds").resultValueStyle()
+                    Text("\(averageTimer(timers: gameData.timeList), specifier: "%.2f") seconds").resultValueStyle()
                 }
                 HStack(spacing: 30) {
                     Image(systemName: "hand.rays")
@@ -53,7 +53,7 @@ struct ResultsView: View {
                         .frame(width: 60)
                     Text("Accuracy:").resultLabelStyle()
                     let accuracy = (Float(gameData.timeList.count) / Float(gameData.totalSpawn)) * 100
-                        Text("\(accuracy) %").resultValueStyle()
+                        Text("\(accuracy, specifier: "%.2f") %").resultValueStyle()
                 }
             }
             .padding(150)

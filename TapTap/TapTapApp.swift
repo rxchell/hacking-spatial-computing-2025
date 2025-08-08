@@ -18,15 +18,15 @@ struct TapTapApp: App {
         
         WindowGroup(id: "HomeView") {
             HomeView()
-        }.windowStyle(.volumetric)
+        }.windowStyle(.automatic)
         
         WindowGroup(id: "InstructionsView") {
             InstructionsView()
-        }.windowStyle(.volumetric)
+        }.windowStyle(.automatic)
         
         WindowGroup(id: "StartGameView") {
             StartGameView()
-        }.windowStyle(.volumetric)
+        }.windowStyle(.automatic)
         
         ImmersiveSpace(id: "BubblesView") {
             BubblesView().environmentObject(gameData)
@@ -34,6 +34,6 @@ struct TapTapApp: App {
         
         WindowGroup(id: "ResultsView") {
             ResultsView().environmentObject(gameData)
-        }.windowStyle(.volumetric)
+        }.windowStyle(.automatic)
     }
 }
